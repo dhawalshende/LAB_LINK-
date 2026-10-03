@@ -5,6 +5,55 @@ import Navbar from "@/components/ui/Navbar";
 import { supabase } from "@/lib/supabase";
 import { QRCodeSVG } from "qrcode.react";
 
+interface Equipment {
+  id: string;
+  name: string;
+  category: string;
+  station_number: string;
+  qr_identifier: string;
+  description?: string;
+  icon?: string;
+  status: string;
+  specs?: any;
+}
+
+interface Booking {
+  id: string;
+  user_id?: string;
+  student_id?: string;
+  faculty_name?: string;
+  equipment_id: string;
+  booking_date?: string;
+  start_time?: string;
+  end_time?: string;
+  time_slot?: string;
+  duration?: number;
+  duration_hours?: number;
+  purpose?: string;
+  experiment_title?: string;
+  status: string;
+  created_at: string;
+  equipment?: {
+    name: string;
+    category: string;
+    station_number: string;
+  };
+}
+
+interface FaultReport {
+  id: string;
+  equipment_id: string;
+  reported_by?: string;
+  reporter_id?: string;
+  description: string;
+  severity?: string;
+  status: string;
+  created_at: string;
+  equipment?: {
+    name: string;
+  };
+}
+
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [mounted, setMounted] = useState(false);
@@ -12,9 +61,9 @@ export default function AdminDashboard() {
   const [inventorySearch, setInventorySearch] = useState("");
 
   // Data states
-  const [equipment, setEquipment] = useState<any[]>([]);
-  const [bookings, setBookings] = useState<any[]>([]);
-  const [faults, setFaults] = useState<any[]>([]);
+  const [equipment, setEquipment] = useState<Equipment[]>([]);
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [faults, setFaults] = useState<FaultReport[]>([]);
 
   // Add Equipment Modal state
   const [showAddModal, setShowAddModal] = useState(false);

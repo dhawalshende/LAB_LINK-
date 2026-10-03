@@ -97,7 +97,7 @@ export default function ScanPage() {
         try {
           if (scanner.isScanning) {
             scanner.stop()
-              .then(() => scanner.clear().catch(() => {}))
+              .then(() => { try { scanner.clear(); } catch (_) {} })
               .catch(() => { try { scanner.clear(); } catch (_) {} });
           } else {
             scanner.clear();
@@ -159,12 +159,12 @@ export default function ScanPage() {
 
       // ── All three checks passed ──
       setSuccessMsg("✓ Check-in successful! Starting your session…");
-      isActiveScanRef.current = false;
+      isProcessingRef.current = false;
 
       const scanner = scannerRef.current;
       if (scanner) {
         await scanner.stop().catch(() => {});
-        await scanner.clear().catch(() => {});
+        try { scanner.clear(); } catch (_) {}
         scannerRef.current = null;
       }
 

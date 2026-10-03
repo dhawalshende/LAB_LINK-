@@ -283,7 +283,7 @@ export default function Home() {
           <div>
             <h4>Explore</h4>
             <Link href="/equipment">Equipment</Link>
-            <Link href="/labs">Laboratories</Link>
+            <Link href="/my-bookings">My Bookings</Link>
             <Link href="#how-it-works">How it works</Link>
           </div>
           <div>

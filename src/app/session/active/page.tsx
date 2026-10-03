@@ -1,12 +1,28 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import Navbar from "@/components/ui/Navbar";
 import FaultModal from "@/components/ui/FaultModal";
 
 export default function ActiveSessionPage() {
+  return (
+    <Suspense fallback={
+      <main className="page-wrap">
+        <Navbar />
+        <div className="page-loader">
+          <div className="loader-ring" />
+          <p className="loader-text">Loading session…</p>
+        </div>
+      </main>
+    }>
+      <ActiveSessionInner />
+    </Suspense>
+  );
+}
+
+function ActiveSessionInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const bookingId = searchParams.get("bookingId");
