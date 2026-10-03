@@ -1,0 +1,42 @@
+.shiny-text {
+  color: var(--text-primary);
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  display: inline-block;
+  animation: shine 3s linear infinite;
+}
+
+/* For dark text, white shimmer doesn't work well, use a brightness shimmer */
+.shiny-text-dark {
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(0, 82, 255, 0.4) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s linear infinite;
+  color: inherit;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}
+
+.shiny-text.disabled {
+  animation: none;
+}
